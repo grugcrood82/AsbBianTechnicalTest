@@ -69,6 +69,35 @@ POST http://localhost:7071/api/entitlement/check
 }
 ```
 
+## Get Started Hack
+
+**Quick start for local development:**
+
+```bash
+# Start all services with build (pulls latest images & rebuilds containers)
+docker-compose up -d --build
+
+# Or just the essentials:
+docker-compose up -d --build neo4j
+
+# Verify Neo4j is ready (wait ~10s for startup)
+curl http://localhost:7474  # Web UI should respond
+
+# Seed demo data
+curl -X POST http://localhost:7071/api/entitlement/seed
+
+# Test the entitlement check
+curl -X POST http://localhost:7071/api/entitlement/check \
+  -H "Content-Type: application/json" \
+  -d '{"subjectId":"CUST-001","permission":"VIEW_BALANCE","resourceId":"ACC-12345"}'
+```
+
+**Using Visual Studio:**
+1. Set the startup projects: `EntitlementsService` as the main project
+2. Ensure Docker Desktop is running
+3. Press **F5** or run → the Function App will start and docker-compose will initialize
+4. Neo4j data browser: http://localhost:7474 (user: `neo4j`, password: `password`)
+
 ## Project Layout
 
 ```
