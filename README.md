@@ -91,7 +91,28 @@ curl -X POST http://localhost:7071/api/entitlement/check \
   -H "Content-Type: application/json" \
   -d '{"subjectId":"CUST-001","permission":"VIEW_BALANCE","resourceId":"ACC-12345"}'
 ```
+#### ARM64 Work around
+To prevent .NET Docker builds from hanging on ARM64 hardware (due to x64 emulation), you must specify the architecture by setting --platform linux/arm64 during docker build and optimizing the Dockerfile to use native SDKs. This ensures the .NET SDK runs natively, avoiding slow QEMU emulation.
+```
+# 1. Use --platform=$BUILDPLATFORM to run the SDK natively (no emulation)
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+WORKDIR /app
 
+# 2. Copy and restore (rest of your Dockerfile)
+COPY *.csproj ./
+RUN dotnet restore
+
+COPY . ./
+# 3. Publish for arm64 specifically
+RUN dotnet publish -c Release -a arm64 -o out
+
+# 4. Final Stage
+FROM ://microsoft.com
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "myapp.dll"]
+
+```
 **Using Visual Studio:**
 1. Set the startup projects: `EntitlementsService` as the main project
 2. Ensure Docker Desktop is running
