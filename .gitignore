@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/__azurite_db_blob_extent__.json
+/__azurite_db_blob__.json
+/__azurite_db_queue_extent__.json
+/__azurite_db_queue__.json
+/__azurite_db_table__.json
+/AsbTechnicalBianComplientTest/bin/Debug/net10.0
+/AsbTechnicalBianComplientTest/obj

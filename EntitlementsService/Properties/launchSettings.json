@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "AsbBianTechnicalTest": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7178"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "containerRunArguments": "--init",
+      "httpPort": 34997,
+      "useSSL": false
+    }
+  }
+}

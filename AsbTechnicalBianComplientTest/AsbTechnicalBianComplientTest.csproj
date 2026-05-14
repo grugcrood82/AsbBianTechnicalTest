@@ -1,0 +1,21 @@
+﻿<Project Sdk="MSTest.Sdk/4.0.2">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseVSTest>true</UseVSTest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Neo4j.Driver" Version="6.0.0" />
+    <PackageReference Include="Testcontainers" Version="3.6.0" />
+    <PackageReference Include="Testcontainers.Neo4j" Version="3.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntitlementsService\AsbBianTechnicalTest.csproj" />
+  </ItemGroup>
+
+</Project>
